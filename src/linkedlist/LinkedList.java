@@ -24,6 +24,28 @@ public class LinkedList {
         tail = newNode;
     }
 
+    public void deleteFirst(int element) {
+        deleteFirst(element, head, null);
+    }
+
+    private void deleteFirst(int element, Node next, Node prev) {
+        Node aux = next;
+
+        if (aux.data == element) {
+            if (prev == null) {
+                head = aux.next;
+                return;
+            }
+            prev.next = aux.next;
+            return;
+        } else if (aux.next == null && aux.data != element) {
+            throw new RuntimeException("Data not found.");
+        } else {
+            deleteFirst(element, aux.next, aux);
+        }
+
+    }
+
     public void printAll() {
         if (head != null) {
             Node aux = head;
